@@ -4,22 +4,22 @@ import os
 
 def run(cloth, model):
     make_dir()
-    cloth.save("/content/inputs/test/cloth/cloth.jpg")
-    model.save("/content/inputs/test/image/model.jpg")
+    cloth.save("/tmp/inputs/test/cloth/cloth.jpg")
+    model.save("/tmp/inputs/test/image/model.jpg")
 
     # running script to compute the predictions
-    os.system("rm -rf /content/output/")
-    os.system("python /content/clothes-virtual-try-on/run.py")
+    os.system("rm -rf /tmp/output/")
+    os.system("python /app/clothes-virtual-try-on/run.py")
 
     # loading output
-    op = os.listdir("/content/output")[0]
-    op = Image.open(f"/content/output/{op}")
+    op = os.listdir("/tmp/output")[0]
+    op = Image.open(f"/tmp/output/{op}")
     return op
 
 def make_dir():
-    os.makedirs("/content/inputs/test/cloth", exist_ok=True)
-    os.makedirs("/content/inputs/test/image", exist_ok=True)
-    os.makedirs("/content/output", exist_ok=True)
+    os.makedirs("/tmp/inputs/test/cloth", exist_ok=True)
+    os.makedirs("/tmp/inputs/test/image", exist_ok=True)
+    os.makedirs("/tmp/output", exist_ok=True)
 
 def main():
     st.title("Clothes Virtual Try ON")
